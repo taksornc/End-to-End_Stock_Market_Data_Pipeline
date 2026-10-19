@@ -20,7 +20,7 @@ Data Pipeline สำหรับดึงข้อมูลตลาดหุ้
 ## 🏗️ ลำดับการทำงานของ Pipeline (Workflow Architecture)
 
 1. **`is_api_available` (Sensor):** ตรวจสอบความพร้อมการใช้งานของ Yahoo Finance API
-2. **`get_stock_prices` (PythonOperator):** ดึงข้อมูลราคาหุ้นรายวัน (เช่น หุ้น NVIDIA - `NVDA`)
+2. **`get_stock_prices` (PythonOperator):** ดึงข้อมูลราคาหุ้นรายวัน (NVIDIA - `NVDA`)
 3. **`store_prices` (PythonOperator):** บันทึกข้อมูลดิบในรูปแบบ JSON ลงใน MinIO Object Storage
 4. **`format_prices` (DockerOperator):** เรียกใช้ Docker Container เพื่อรัน PySpark Job (`airflow/stock-app`) สื่อสารผ่าน `docker-proxy` เพื่อทำ Cleaning และแปลงไฟล์เป็น CSV
 5. **`get_formatted_csv` (PythonOperator):** ดึง S3 Path ของไฟล์ CSV ที่ประมวลผลแล้วใน MinIO
